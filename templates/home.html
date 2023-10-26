@@ -40,12 +40,25 @@
         
         
     }
-    h2{
+    h4{
         text-align: center;
         color: gray;
         
         
         
+    }
+    h6{
+        text-align: center;
+        color: gray;
+
+
+
+    }
+    .text{
+        font-size:0.9em;
+        color:gray;
+        text-align: center;
+
     }
 
 </style>
@@ -55,7 +68,8 @@
         <a href="{{url_for('register')}}"> register</a>
         <a href="{{url_for('home')}}"> info</a>
     </div>
-    <h1>Fake Instagram</h1>
-    <h2>fake instagram cuz am boored + guess thee criminal game cuz like why not innit blud</h2>
+    <h1>Emanstagram</h1>
+    <h6>if youve read all this then either <a href="{{url_for('login')}}">login</a> or <a href="{{url_for('register')}}"> register</a> </h6>
+    <div class="text">fake instagram cuz am boored + guess thee criminal game(didnt do too lazy) cuz like why not innit blud umm basically register then login blahdey blah you can change ur pfp by going to profile er you can click on the pfps of the posts to see only thier posts, you can comments and thats about it but dont even violate cuz wheres your website ;) dont worry about the numbers next to the comment box. skip the bold if you dont care about the reason. <strong>the number next to the comment box represents the post id. it is there because i had trouble parsing the postid to the website view so instead take the post i did and put it as part of the form in which i can easily take the value. i also tried making it hidden but there was also issues with getting the value. so i have just made it readonly so you cant edit it anyway;) </strong> have fun stay safe yeh</div>
 </body>
 </html>

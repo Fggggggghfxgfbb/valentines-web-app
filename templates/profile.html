@@ -31,6 +31,15 @@
 
 
     }
+
+
+    .circle{
+        border-radius: 50%;
+        width:100px;
+        height:100px;
+        object-fit: cover;
+
+    }
     .topnav a{
         float: right;
         background-color: darkgrey;
@@ -69,7 +78,7 @@
     <div class="center">
         <form method="POST" action="" enctype="multipart/form-data">
             <label for="files">What you want your pfp to be?</label><br><br>
-            <div class="pfp"><img src="data:image/jpeg;base64, {{ current_user.pfp }}"></div>
+            <div class="pfp"><img src="data:image/jpeg;base64, {{ current_user.pfp }}" class="circle"></div>
             <input type="file" name="file" id="files"><br><br>
             <input type="submit">
         </form>

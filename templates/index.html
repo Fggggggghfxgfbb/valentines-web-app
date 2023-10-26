@@ -22,10 +22,12 @@
 
 
     }
+    .divider{
 
+    }
 
     .post {
-            padding: 5px;
+            padding: 10px;
 
 
             background-color: lightgray;
@@ -41,18 +43,38 @@
     }
 
     .pfp{
-        width:40px;
+
         float: left;
 
     }
-    .pfp img{
+    .circle{
         border-radius: 50%;
+        width:40px;
+        height:40px;
+        object-fit: cover;
+
+    }
+    .circle1{
+        border-radius: 50%;
+        width:20px;
+        height:20px;
+        object-fit: cover;
 
     }
     .post img{
-            padding: 10px 0px;
+         padding: 10px 0px;
 
-            width: 100%;
+         width: 100%;
+
+
+    }
+
+    .post a{
+        padding: 10px 0px;
+        width: 40px
+        float: left;
+
+
 
 
     }
@@ -61,15 +83,18 @@
 
 
     }
+    .bruh {
+        padding: 10px 0px;
 
+    }
 
 
     .center{
         display: flex;
         justify-content: center;
-        width: 60%;
+        width: 80%;
         margin: auto;
-        background-color: white;
+
 
     }
     .bruh{
@@ -95,7 +120,8 @@
 
     }
     .comment{
-
+        background-color: white;
+        width:
     }
 
     .topnav a:hover{
@@ -116,7 +142,7 @@
 
 </style>
 <body>
-    <div class="text">Welcome {{ current_user.username }} to my fake insta <3</div>
+    <div class="text">Welcome <strong>{{ current_user.username }}</strong> to my fake insta <3</div>
     <div class= "topnav">
 
         <a href="{{url_for('logout')}}">logout</a>
@@ -125,40 +151,43 @@
         <a href="{{url_for('index')}}">homepage</a>
 
     </div>
-    <div class="center"><h1>Emanstigram</h1></div>
+    <div class="center"><h1>Emanstagram</h1></div>
     <div class="center">
         <div class="post">
             {% for post in posts %}
-                <div class="pfp"><img src="data:image/jpeg;base64, {{ post.pdata }}" ></div><strong>{{ post.pname }}</strong><br>
-                <img src="data:image/jpeg;base64, {{ post.data }}"><br>
-                {{ post.caption }}<br><br>
+                <a href="{{url_for('index1', username=post.pname)}}"><img src="data:image/jpeg;base64, {{ post.pdata }}" class="circle" style="width: 40px;float:left;" ><br></a><strong>{{ post.pname }}</strong><br>
+                <img src="data:image/jpeg;base64, {{ post.data }}" style=""><br>
+                <strong>{{ post.pname }}</strong> ‎ {{ post.caption }}<br><br>
                 <form method="POST" action="">
                     {{form.hidden_tag()}}
                     {{form.comment}}
-                    {{form.postid(value=post.id)}}
+                    {{form.postid(size=1, value=post.id, readonly=true)}}
                     {{form.submit}}
                 </form>
 
                 <div class="commentsection">
                     <h3>Comments</h3>
                     {% for comment in post.comments %}
-                        <div class="comment">
-                            <div class="pfp"><img src="data:image/jpeg;base64, {{ post.pdata }}"></div>
-                            <STRONG>{{ comment.pname }}</STRONG><br>
-                            {{ comment.comment }}
+                        <div class="">
+                            <div class="pfp"><img src="data:image/jpeg;base64, {{ comment.pfp }}" class="circle1" style="width: 20px;"></div>
+                            <STRONG>&nbsp&nbsp{{ comment.pname }}</STRONG><br>
+                            &nbsp&nbsp{{ comment.comment }}
 
 
                         </div>
-                        <br><br>
+                        <br>
                     {% endfor %}
 
 
 
                 </div>
                 <h6>{{ post.postdate }}</h6><br>
+                <div class="comment">‎  </div>
             {% endfor %}
 
+
         </div>
+
 
     </div>
 

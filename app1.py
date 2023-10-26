@@ -9,7 +9,7 @@ from wtforms import StringField, PasswordField, SubmitField, validators, TextAre
 from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
 import os
-from werkzeug.urls import url_decode
+
 
 app = Flask(__name__)
 
@@ -121,6 +121,29 @@ def postpage():
 
     return render_template("post.html")
 
+@app.route("/index/<username>", methods=['GET', 'POST'])
+@login_required
+def index1(username):
+    posts = Post.query.filter_by(pname=username)
+    pfp1 = User.query.filter_by(username=username).first()
+    form = commentform()
+    username = username
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            post_id = form.postid.data
+            #idiij = post_id
+            comment = Comment(comment=form.comment.data,
+                              postdate=datetime.now().replace(microsecond=0),
+                              pfp=current_user.pfp, pname=current_user.username,
+                              post_id=post_id)
+            dbs.session.add(comment)
+            dbs.session.commit()
+            return redirect(url_for('index1'))
+
+    comments = Comment.query.order_by(Comment.postdate.desc())
+
+    return render_template('acc.html', posts=posts, form=form, comments=comments, username=username, pfp1=pfp1)
+
 
 @app.route("/index", methods=['GET', 'POST'])
 @login_required
@@ -158,7 +181,7 @@ def profile():
                 return redirect(url_for('profile'))
             else:
                 data = base64.b64encode(uploadedfile.read()).decode()
-                current_user.pfp = data
+                current_user = data
                 dbs.session.commit()
 
                 return redirect(url_for('profile'))
