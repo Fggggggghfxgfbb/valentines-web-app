@@ -157,9 +157,22 @@
 
     </div>
     <div class="center"><h1>Emanstagram</h1></div>
-    <div class="center"><img src="data:image/jpeg;base64, {{ pfp1.pfp }}" class="circle" style="width: 100px;float:left;" ><br><h2><strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ username }}</strong></h2><br></div><br>
-    <div class="center"><strong> followers: 0 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp following: 0</strong></div>
-    <div class="center"><h6><strong> 0 followers LOL because im too lazy to do following etc</strong></h6><br></div><br><br>
+    <div class="center"><img src="data:image/jpeg;base64, {{ user.pfp }}" class="circle" style="width: 100px;float:left;" ><br><h2><strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ username }}</strong></h2><br></div><br>
+    <div class="center"><strong> followers: 0 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp following: 0</strong></div><br>
+    <div class="center">
+
+        {% if current_user.isfollowing(user) %}
+            <form method="POST" action="{{url_for('unfollow', username=username) }}" enctype="multipart/form-data">
+                <input type="submit" value="Unfollow">
+            </form>
+        {% else %}
+            <form method="POST" action="{{url_for('follow', username=username) }}" enctype="multipart/form-data">
+                <input type="submit" value="Follow">
+        {% endif %}
+
+        </form>
+    </div><br>
+
     <div class="center">
 
 

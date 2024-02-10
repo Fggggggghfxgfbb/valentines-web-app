@@ -78,9 +78,9 @@
 
 
     }
-    .commentsection{
+    .delete{
 
-
+        font-size:10px;
 
     }
     .bruh {
@@ -156,6 +156,9 @@
         <div class="post">
             {% for post in posts %}
                 <a href="{{url_for('index1', username=post.pname)}}"><img src="data:image/jpeg;base64, {{ post.pdata }}" class="circle" style="width: 40px;float:left;" ><br></a><strong>{{ post.pname }}</strong><br>
+                {% if current_user.username == post.pname %}
+                    <a href="{{url_for('delete', post_id=post.id)}}" class="delete"> delete post</a>
+                {% endif %}
                 <img src="data:image/jpeg;base64, {{ post.data }}" style=""><br>
                 <strong>{{ post.pname }}</strong> ‎ {{ post.caption }}<br><br>
                 <form method="POST" action="">
@@ -172,6 +175,9 @@
                             <div class="pfp"><img src="data:image/jpeg;base64, {{ comment.pfp }}" class="circle1" style="width: 20px;"></div>
                             <STRONG>&nbsp&nbsp{{ comment.pname }}</STRONG><br>
                             &nbsp&nbsp{{ comment.comment }}
+                            {% if current_user.username == comment.pname %}
+                                <a href="{{url_for('deletecomment', commentid=comment.id)}}" class="delete"> delete</a>
+                            {% endif %}
 
 
                         </div>
